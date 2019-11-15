@@ -1,6 +1,4 @@
 const mainRoute = (request, response) => {
-  // console.log("request", request);
-
   response.writeHead(200, { "Content-Type": "text/html" });
   response.write("<h1>Hello world 222!</h1>");
   response.end();
