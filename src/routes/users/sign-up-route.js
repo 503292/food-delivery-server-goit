@@ -27,7 +27,7 @@ const signUpRoute = (request, response) => {
 
     request.on("data", function(data) {
       body = body + data;
-
+      console.log(body, "body");
       saveUser(body);
 
       response.setHeader("Content-Type", "application/json");
@@ -36,12 +36,14 @@ const signUpRoute = (request, response) => {
 
     request.on("end", function() {
       const post = qs.parse(body);
-      // console.log(post);
+
+      console.log(post, "post");
     });
-  } else {
-    response.writeHead(200, "OK", { "Content-Type": "text/plain" });
-    response.end();
   }
+  // else {
+  //   response.writeHead(200, "OK", { "Content-Type": "text/plain" });
+  //   response.end();
+  // }
 
   // Взять username с данных, сохранить в переменную
 
