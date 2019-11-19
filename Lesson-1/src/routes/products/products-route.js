@@ -23,20 +23,6 @@ const productsRoute = (request, response) => {
       products: file
     })
   );
-
-  // const readStream = fs.createReadStream(filePath);
-
-  // readStream.pipe(response);
-
-  // fs.readFile(filePath, "utf8", function(error, data) {
-  //   if (!error) {
-  //     const jsonObj = JSON.parse(data); // Parse Data to JSON
-  //     console.log(jsonObj);
-  //     // response.json(data); //Send back as Response
-  //   } else {
-  //     response.end("Error: " + error); //Handle Error
-  //   }
-  // });
 };
 
 module.exports = productsRoute;
