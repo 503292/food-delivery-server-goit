@@ -27,32 +27,20 @@ const signUpRoute = (request, response) => {
 
     request.on("data", function(data) {
       body = body + data;
-      console.log(body, "body");
       saveUser(body);
 
       response.setHeader("Content-Type", "application/json");
-      response.end(body);
-    });
 
-    request.on("end", function() {
-      const post = qs.parse(body);
+      let answerBody = {
+        status: "success",
+        user: JSON.parse(body)
+      };
 
-      console.log(post, "post");
+      let strigifyBody = JSON.stringify(answerBody);
+
+      response.end(strigifyBody);
     });
   }
-  // else {
-  //   response.writeHead(200, "OK", { "Content-Type": "text/plain" });
-  //   response.end();
-  // }
-
-  // Взять username с данных, сохранить в переменную
-
-  // Сохраняем данные в <username>.json
-
-  // Сохранить <username>.json в папку users
-
-  // Отправляем файл в ответе с данными юзера
-  // использовать response
 };
 
 module.exports = signUpRoute;
