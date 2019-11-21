@@ -28,7 +28,8 @@ const productToAdd = [
 ];
 
 const productPath = "../../db/products/all-products.json";
-const newProductPath = "../../db/products/new-all-products.json";
+// const newProductPath = "../../db/products/new-all-products.json";
+const newProductPath2 = "../../dbTEMP/replace-products.json";
 
 // read and write file
 // fs.readFile(productPath, "utf8", (err, data) => {
@@ -45,3 +46,8 @@ const newProductPath = "../../db/products/new-all-products.json";
 // fs.unlink(newProductPath, () => {
 //   console.log("delete DONE!");
 // });
+
+//  replace file
+fs.rename(productPath, newProductPath2, () => {
+  console.log("replace DONE!");
+});
