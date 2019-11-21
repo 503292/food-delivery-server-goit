@@ -22,5 +22,29 @@
     "created": "21-08-2018",
     "modified": "21-08-2018",
     "categories": ["pizza"]
+  },
+  {
+    "id": 191128311,
+    "sku": 1120001,
+    "name": "Rом",
+    "description": "cha cha cha",
+    "price": "123",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-08-2018",
+    "modified": "21-08-2018",
+    "categories": ["drink"]
+  },
+  {
+    "id": 191128321,
+    "sku": 1120002,
+    "name": "Visky",
+    "description": "macarena",
+    "price": "234",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-08-2018",
+    "modified": "21-08-2018",
+    "categories": ["drink"]
   }
 ]
