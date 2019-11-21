@@ -13,3 +13,9 @@ const newDirectoryPath2 = "../../dbTEMP/1/2/3";
 // read DIR
 const file = fs.readdirSync(__dirname);
 console.log(file, "DIR is read");
+
+// or file or DIR / size
+const fileStats = fs.statSync(file[0]);
+console.log(fileStats.isFile());
+console.log(fileStats.isDirectory());
+console.log(fileStats.size);
