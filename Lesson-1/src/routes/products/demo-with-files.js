@@ -30,13 +30,18 @@ const productToAdd = [
 const productPath = "../../db/products/all-products.json";
 const newProductPath = "../../db/products/new-all-products.json";
 
-// зчитування файла і запис в файл
-fs.readFile(productPath, "utf8", (err, data) => {
-  const products = JSON.parse(data);
+// read and write file
+// fs.readFile(productPath, "utf8", (err, data) => {
+//   const products = JSON.parse(data);
 
-  const newProducts = [...products, ...productToAdd];
+//   const newProducts = [...products, ...productToAdd];
 
-  fs.writeFile(newProductPath, JSON.stringify(newProducts), err => {
-    console.log("Done!");
-  });
-});
+//   fs.writeFile(newProductPath, JSON.stringify(newProducts), err => {
+//     console.log("Done!");
+//   });
+// });
+
+// delete file
+// fs.unlink(newProductPath, () => {
+//   console.log("delete DONE!");
+// });
