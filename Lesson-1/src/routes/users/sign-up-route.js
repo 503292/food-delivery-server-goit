@@ -9,7 +9,7 @@ const saveUser = user => {
     "../../",
     "db",
     "users",
-    `${username.username}.json`
+    `${username.username.toLowerCase()}.json`
   );
 
   fs.writeFile(pathToFile, user, function(err) {
