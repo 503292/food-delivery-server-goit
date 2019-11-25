@@ -16,7 +16,7 @@ const productsRoute = (request, response) => {
     "Content-Type": "application/json"
   });
 
-  let file = JSON.parse(allProducts);
+  const file = JSON.parse(allProducts);
 
   response.end(
     JSON.stringify({
