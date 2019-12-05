@@ -1,6 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
+const getOneProductById = id => {
+  return;
+};
+const getProductsByIds = ids => {
+  return;
+};
+
 const productsRoute = (request, response) => {
   let filePath = path.join(
     __dirname,
@@ -11,6 +18,8 @@ const productsRoute = (request, response) => {
   );
 
   const allProducts = fs.readFileSync(filePath, "utf8");
+
+  console.log(request.url, "requestddddddddddddddddddddddddddddd");
 
   response.writeHead(200, {
     "Content-Type": "application/json"
