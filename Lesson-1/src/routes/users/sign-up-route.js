@@ -29,7 +29,6 @@ const signUpRoute = (request, response) => {
 
     request.on("data", function(data) {
       body = body + data;
-      // console.log(body);
       saveUser(body);
 
       response.setHeader("Content-Type", "application/json");
