@@ -5,7 +5,6 @@ const getIdFreeUrl = url => {
   const lastIndex = url.lastIndexOf("/");
   const idString = url.slice(lastIndex + 1).trim();
 
-  console.log(idString);
   // url example : `/users`
   if (!hasNumber(idString)) {
     return url;
@@ -14,7 +13,6 @@ const getIdFreeUrl = url => {
   const idNumber = +idString;
 
   if (idNumber && lastIndex !== -1) {
-    console.log(lastIndex, "idString");
     return url.slice(0, lastIndex);
   }
 
@@ -27,7 +25,7 @@ const getRouteHandler = (routerConfig, url) => {
   return routerConfig[clearUrl];
 };
 
-console.log(getIdFreeUrl(`/users/123`));
-console.log(hasNumber());
+// console.log(getIdFreeUrl(`/users/123`));
+// console.log(hasNumber());
 
 module.exports = getRouteHandler;

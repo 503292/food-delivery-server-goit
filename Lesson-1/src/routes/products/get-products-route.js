@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const url = require("url");
 
 const getId = url => {
   const lastIndex = url.lastIndexOf("/");
@@ -19,11 +20,6 @@ const getProductsByIds = ids => {
 };
 
 const productsRoute = (request, response) => {
-  console.log(request.url, "тут має бути урл з id, а він сюда не долітає");
-  // let url;
-  // const parsedUrl = url.parse(request.url);
-  // const id = getId(parsedUrl.path);
-  // console.log(request.url, "request.url"); //
   let filePath = path.join(
     __dirname,
     "../../",
@@ -34,19 +30,32 @@ const productsRoute = (request, response) => {
 
   const allProducts = fs.readFileSync(filePath, "utf8");
 
+  // console.log(request.url, "тут");
+
+  const id = getId(request.url);
+
   // TODO if else => for query url
 
-  response.writeHead(200, {
-    "Content-Type": "application/json"
-  });
+  response.setHeader("Content-Type", "application/json");
+  response.writeHead(200);
+
+  if (id >= 0) {
+    const parseProducts = JSON.parse(allProducts);
+
+    const resultById = parseProducts.find(prod => prod.id == id);
+    if (resultById === undefined) {
+      response.end(JSON.stringify({ status: "no products", products: [] }));
+      return;
+    }
+
+    response.end(JSON.stringify({ status: "success", products: resultById }));
+    return;
+  }
 
   const file = JSON.parse(allProducts);
 
-  response.end(
-    JSON.stringify({
-      products: file
-    })
-  );
+  response.end(JSON.stringify({ products: file }));
+  return;
 };
 
 module.exports = productsRoute;

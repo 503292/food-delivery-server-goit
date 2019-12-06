@@ -1,11 +1,11 @@
 const productsRoute = require("./get-products-route");
-// const createProduct = require("./create-product");
 
 const handleProductsRoute = (request, response) => {
   const reqMethod = request.method;
+  // console.log(request.method, "------Method");
 
   if (reqMethod === "GET") {
-    console.log(request.url, "handler");
+    // console.log(request.url, "handler");
     productsRoute(request, response);
     return;
   }
