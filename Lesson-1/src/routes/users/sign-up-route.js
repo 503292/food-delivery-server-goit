@@ -3,13 +3,15 @@ const path = require("path");
 const fs = require("fs");
 
 const saveUser = user => {
-  username = JSON.parse(user);
+  const userData = JSON.parse(user);
+  console.log(userData);
   const pathToFile = path.join(
     __dirname,
     "../../",
     "db",
     "users",
-    `${username.username.toLowerCase()}.json`
+
+    `${userData.usernametoLowerCase()}.json`
   );
 
   fs.writeFile(pathToFile, user, function(err) {
@@ -27,6 +29,7 @@ const signUpRoute = (request, response) => {
 
     request.on("data", function(data) {
       body = body + data;
+      // console.log(body);
       saveUser(body);
 
       response.setHeader("Content-Type", "application/json");
