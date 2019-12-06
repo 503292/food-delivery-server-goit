@@ -14,6 +14,7 @@ const getIdFreeUrl = url => {
   const idNumber = +idString;
 
   if (idNumber && lastIndex !== -1) {
+    console.log(lastIndex, "idString");
     return url.slice(0, lastIndex);
   }
 

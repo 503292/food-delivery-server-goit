@@ -19,9 +19,11 @@ const getProductsByIds = ids => {
 };
 
 const productsRoute = (request, response) => {
-  const parsedUrl = url.parse(request.url);
-  const id = getId(parsedUrl.path);
-  console.log(id, "request.url");
+  console.log(request, "lllllllllllllllllllll");
+  // let url;
+  // const parsedUrl = url.parse(request.url);
+  // const id = getId(parsedUrl.path);
+  console.log(request.url, "request.url"); //
   let filePath = path.join(
     __dirname,
     "../../",
