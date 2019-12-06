@@ -5,9 +5,9 @@ const handleProductsRoute = require("./products/handle-products-route");
 
 const router = {
   "/signup": signUpRoute,
-  // "/products": productsRoute,
   "/products": handleProductsRoute,
-  // "/products/add-order": handleProductsRoute,
+  // "/products/id": handleProductsRoute,
+
   default: mainRoute
 };
 

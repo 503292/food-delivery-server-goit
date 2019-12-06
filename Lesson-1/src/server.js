@@ -10,10 +10,10 @@ const startServer = port => {
   const server = http.createServer((request, response) => {
     // Get route from the request
     const parsedUrl = url.parse(request.url);
-    // console.log(parsedUrl, "parsedUrl");
-    // console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPUrl");
+    // console.log(parsedUrl.pathname, "parsedUrl");
 
     // Get router function
+    // тут воно не предає або не зчитує
     const func = router[parsedUrl.pathname] || router.default;
 
     logger(request, response, () => func(request, response));

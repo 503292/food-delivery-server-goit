@@ -3,9 +3,10 @@ const productsRoute = require("./products-route");
 
 const handleProductsRoute = (request, response) => {
   const reqMethod = request.method;
+  console.log(reqMethod);
 
   if (reqMethod === "GET") {
-    // console.log(request);
+    console.log(request.url, "handler");
     productsRoute(request, response);
     return;
   }
