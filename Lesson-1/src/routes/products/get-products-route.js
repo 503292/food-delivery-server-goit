@@ -30,15 +30,12 @@ const productsRoute = (request, response) => {
 
   const allProducts = fs.readFileSync(filePath, "utf8");
 
-  // console.log(request.url, "тут");
-
   const id = getId(request.url);
-
-  // TODO if else => for query url
 
   response.setHeader("Content-Type", "application/json");
   response.writeHead(200);
 
+  //route for /products/123123123 id
   if (id >= 0) {
     const parseProducts = JSON.parse(allProducts);
 
@@ -52,6 +49,7 @@ const productsRoute = (request, response) => {
     return;
   }
 
+  //route for /products
   const file = JSON.parse(allProducts);
 
   response.end(JSON.stringify({ products: file }));
