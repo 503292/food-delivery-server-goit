@@ -10,7 +10,8 @@ const saveUser = user => {
     "../../",
     "db",
     "users",
-    `${userData.username}.json`
+
+    `${userData.usernametoLowerCase()}.json`
   );
 
   fs.writeFile(pathToFile, user, function(err) {
@@ -28,7 +29,6 @@ const signUpRoute = (request, response) => {
 
     request.on("data", function(data) {
       body = body + data;
-      // console.log(body);
       saveUser(body);
 
       response.setHeader("Content-Type", "application/json");
