@@ -50,6 +50,7 @@ const bodyParser = require("body-parser");
 // const morgan = require("morgan");
 const router = require("./routes/routes");
 // const middleware = require("./middleware/middleware");
+const corsMiddleware = require("cors");
 
 const app = express();
 
@@ -66,5 +67,7 @@ app
     res.json({ message: "Invalid url" });
   });
 // .use(middleware.errorHandler);
+
+// app.use(corsMiddleware);
 
 module.exports = app;
