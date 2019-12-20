@@ -39,5 +39,18 @@ module.exports = {
     });
     answer(result, res);
   },
-  byAll: (data, res) => answer(data, res)
+  byAll: (data, res) => answer(data, res),
+
+  postUser: (data, body, usersPath, res) => {
+    const usersArr = data ? JSON.parse(data) : [];
+    usersArr.push({ id: uuidv4(), ...user });
+
+    fs.writeFile(usersPath, JSON.stringify(usersArr), err => {
+      if (err) {
+        console.log(err);
+      }
+
+      res({ status: "success", user: usersArr[usersArr.length - 1] });
+    });
+  }
 };

@@ -3,7 +3,7 @@ const path = require("path");
 
 const productsPath = path.join(__dirname, "..", "db", "all-products.json");
 
-const productService = {
+const productsService = {
   getAll: () => {
     return new Promise((res, rej) => {
       fs.open(productsPath, "r", (err, fd) => {
@@ -110,6 +110,5 @@ const productService = {
 };
 
 module.exports = {
-  // productsPath,
-  productService
+  productsService
 };

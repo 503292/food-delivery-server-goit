@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const {
   // getAllUsers,
-  // postUser,
+  addUser,
   // getUserById,
   // putUserById,
   // deleteUserById
@@ -14,7 +14,7 @@ router.get("/", getUsers);
 
 router.get("/:id", getUsers);
 
-// router.post("/", postUser);
+router.post("/", addUser);
 
 // router.put("/:id", putUserById);
 

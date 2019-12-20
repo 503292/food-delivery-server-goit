@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const search = require("./usersServices");
-const users = path.join(__dirname, "../db/all-users.json");
+const usersService = require("./usersServices");
+const usersPath = path.join(__dirname, "../db/all-users.json");
 
-fs.readFile(users, "utf8", (err, data) => {
+fs.readFile(usersPath, "utf8", (err, data) => {
   return (parsedData = JSON.parse(data));
 });
 
@@ -17,19 +17,29 @@ const getUsers = async (req, res, next) => {
       await search.byId(parsedData, id, res);
     } else if (url.charAt(1) === "?") {
       if (req.query.ids) {
-        await search.byIds(parsedData, req.query.ids, res);
+        await usersService.byIds(parsedData, req.query.ids, res);
       }
       if (req.query.categories) {
-        await search.byCategories(parsedData, req.query.categories, res);
+        await usersService.byCategories(parsedData, req.query.categories, res);
       }
     } else {
-      await search.byAll(parsedData, res);
+      await usersService.byAll(parsedData, res);
     }
   } catch (e) {
     console.log("Catch error", e);
   }
 };
 
+const addUser = async (req, res, next) => {
+  try {
+    const user = await usersService.postUser(parsedData, req.body,usersPath, res);
+    res.json(user);
+  } catch (e) {
+    console.log("Catch error", e);
+  }
+};
+
 module.exports = {
-  getUsers
+  getUsers,
+  addUser
 };
