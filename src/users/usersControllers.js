@@ -31,12 +31,28 @@ const getUsers = async (req, res, next) => {
 };
 
 const addUser = async (req, res, next) => {
-  try {
-    const user = await usersService.postUser(parsedData, req.body,usersPath, res);
-    res.json(user);
-  } catch (e) {
-    console.log("Catch error", e);
-  }
+  parsedData.push = {
+    id: Date.now(),
+    ...req.body
+  };
+  // console.log(user, "user");
+
+  // const usersArr = (user);
+  console.log(parsedData, "usersArr");
+
+  fs.writeFile(usersPath, JSON.stringify(parsedData), err => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
+  res.status(201).json(parsedData);
+  // try {
+  //   const user = await usersService.postUser(parsedData, req.body,usersPath, res);
+  //   res.json(user);
+  // } catch (e) {
+  //   console.log("Catch error", e);
+  // }
 };
 
 module.exports = {
