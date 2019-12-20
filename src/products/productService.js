@@ -1,13 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const productsPath = path.join(
-  __dirname,
-  "..",
-  "db",
-  "products",
-  "all-products.json"
-);
+const productsPath = path.join(__dirname, "..", "db", "all-products.json");
 
 const productService = {
   getAll: () => {
@@ -47,39 +41,53 @@ const productService = {
   },
 
   getByIds: ids => {
+    console.log(ids);
     try {
       return new Promise((res, rej) => {
         fs.open(productsPath, "r", (err, fd) => {
-          fs.readFile(fd, "utf-8", (err, data) => {
-            const allProducts = JSON.parse(data);
+          fs.readFile(fd, "utf8", (err, data) => {
+            const productsArr = JSON.parse(data);
 
-            const idsArr = ids.split(",").map(product => Number(product));
+            let idsArr = "";
 
-            const products = allProducts.filter(product =>
-              idsArr.includes(product.id)
+            if (ids.charAt(0) === "[") {
+              idsArr = ids.slice(1, ids.length - 1);
+              idsArr = idsArr.split(",");
+            } else {
+              idsArr = ids.split(",");
+            }
+
+            const products = productsArr.filter(product =>
+              idsArr.includes(String(product.id))
             );
             res(
               products.length
                 ? { status: "success", products }
                 : { status: "no products", products: [] }
             );
+            if (err) rej(err);
           });
-
-          if (err) rej(err);
         });
       });
     } catch (e) {
-      throw new Error("Something went wrong when get by ids:", e);
+      throw new Error("Error getting products by ids: ", e);
     }
   },
 
-  getByCat: category => {
+  getByCategories: categories => {
     return new Promise((res, rej) => {
       fs.open(productsPath, "r", (err, fd) => {
         fs.readFile(fd, "utf-8", (err, data) => {
           const allProducts = JSON.parse(data);
 
-          const categoryArr = category.split(",");
+          let categoryArr = "";
+
+          if (categories.charAt(0) === "[") {
+            categoryArr = categories.slice(1, categories.length - 1);
+            categoryArr = categoryArr.split(",");
+          } else {
+            categoryArr = categories.split(",");
+          }
 
           const products = allProducts.filter(product => {
             const matchedProduct = categoryArr.map(category =>
@@ -102,6 +110,6 @@ const productService = {
 };
 
 module.exports = {
-  productsPath,
+  // productsPath,
   productService
 };

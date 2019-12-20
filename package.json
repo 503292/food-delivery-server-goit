@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "debug": "node --inspect index.js"
+    "start": "nodemon src/server.js",
+    "debug": "node --inspect src/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,13 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "querystring": "^0.2.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "esm": "^3.2.25",
+    "mongodb": "^3.4.0",
+    "mongoose": "^5.8.1",
+    "node-validator": "^0.1.27",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "randomstring": "^1.1.5"
   }
 }
