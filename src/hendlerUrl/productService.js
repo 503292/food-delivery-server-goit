@@ -47,13 +47,14 @@ const productService = {
   },
 
   getByIds: ids => {
+    console.log(ids);
     try {
       return new Promise((res, rej) => {
         fs.open(productsPath, "r", (err, fd) => {
           fs.readFile(fd, "utf8", (err, data) => {
             const productsArr = JSON.parse(data);
+
             const idsArr = ids.split(",");
-            console.log(idsArr);
             const products = productsArr.filter(product =>
               idsArr.includes(String(product.id))
             );
