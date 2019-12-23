@@ -1,15 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-const productsPath = path.join(
-  __dirname,
-  "..",
-  "db",
-  "products",
-  "all-products.json"
-);
+const productsPath = path.join(__dirname, "..", "db", "all-products.json");
 
-const productService = {
+const productsService = {
   getAll: () => {
     return new Promise((res, rej) => {
       fs.open(productsPath, "r", (err, fd) => {
@@ -47,13 +41,22 @@ const productService = {
   },
 
   getByIds: ids => {
+    console.log(ids);
     try {
       return new Promise((res, rej) => {
         fs.open(productsPath, "r", (err, fd) => {
           fs.readFile(fd, "utf8", (err, data) => {
             const productsArr = JSON.parse(data);
-            const idsArr = ids.split(",");
-            console.log(idsArr);
+
+            let idsArr = "";
+
+            if (ids.charAt(0) === "[") {
+              idsArr = ids.slice(1, ids.length - 1);
+              idsArr = idsArr.split(",");
+            } else {
+              idsArr = ids.split(",");
+            }
+
             const products = productsArr.filter(product =>
               idsArr.includes(String(product.id))
             );
@@ -71,13 +74,20 @@ const productService = {
     }
   },
 
-  getByCat: category => {
+  getByCategories: categories => {
     return new Promise((res, rej) => {
       fs.open(productsPath, "r", (err, fd) => {
         fs.readFile(fd, "utf-8", (err, data) => {
           const allProducts = JSON.parse(data);
 
-          const categoryArr = category.split(",");
+          let categoryArr = "";
+
+          if (categories.charAt(0) === "[") {
+            categoryArr = categories.slice(1, categories.length - 1);
+            categoryArr = categoryArr.split(",");
+          } else {
+            categoryArr = categories.split(",");
+          }
 
           const products = allProducts.filter(product => {
             const matchedProduct = categoryArr.map(category =>
@@ -100,6 +110,5 @@ const productService = {
 };
 
 module.exports = {
-  productsPath,
-  productService
+  productsService
 };
