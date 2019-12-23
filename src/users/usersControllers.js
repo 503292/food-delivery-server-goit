@@ -31,10 +31,10 @@ const getUsers = async (req, res, next) => {
 };
 
 const addUser = async (req, res, next) => {
-  parsedData.push = {
+  parsedData.push({
     id: Date.now(),
     ...req.body
-  };
+  });
   // console.log(user, "user");
 
   // const usersArr = (user);
