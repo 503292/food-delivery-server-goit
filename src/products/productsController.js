@@ -2,7 +2,13 @@ const fs = require("fs");
 const path = require("path");
 const debug = require("debug")("controller");
 
-const productsPath = path.join(__dirname, "..", "db", "all-products.json");
+const productsPath = path.join(
+  __dirname,
+  "..",
+  "db",
+  "products",
+  "all-products.json"
+);
 
 const { productsService } = require("./productsService");
 
@@ -11,7 +17,6 @@ module.exports = {
     try {
       let products;
       if (req._parsedUrl.path === "/") {
-        console.log("req._parsedUrl.path", req._parsedUrl.path);
         products = await productsService.getAll();
       }
 

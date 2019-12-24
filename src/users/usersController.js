@@ -3,7 +3,7 @@ const path = require("path");
 const debug = require("debug")("controller");
 
 const usersService = require("./usersService");
-const usersPath = path.join(__dirname, "../db/all-users.json");
+const usersPath = path.join(__dirname, "../db/users/all-users.json");
 
 getUsersData = async () => {
   try {

@@ -3,7 +3,14 @@ const path = require("path");
 const { productsPath } = require("../products/productsService");
 const { usersPath } = require("../users/usersController");
 
-const ordersPath = path.join(__dirname, "..", "db", "all-orders.json");
+const ordersPath = path.join(
+  __dirname,
+  "..",
+  "db",
+  "users",
+  "orders",
+  "all-orders.json"
+);
 
 module.exports = {
   postOrder: order => {
