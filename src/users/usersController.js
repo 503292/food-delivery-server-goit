@@ -1,12 +1,21 @@
 const fs = require("fs");
 const path = require("path");
+const debug = require("debug")("controller");
 
 const usersService = require("./usersService");
 const usersPath = path.join(__dirname, "../db/all-users.json");
 
-fs.readFile(usersPath, "utf8", (err, data) => {
-  return (parsedData = JSON.parse(data));
-});
+getUsersData = async () => {
+  try {
+    await fs.readFile(usersPath, "utf8", (err, data) => {
+      return (parsedData = JSON.parse(data));
+    });
+  } catch (e) {
+    debug("error %O", e);
+  }
+};
+
+getUsersData();
 
 const getUsers = async (req, res, next) => {
   const url = req.url;
@@ -14,7 +23,7 @@ const getUsers = async (req, res, next) => {
 
   try {
     if (id) {
-      await search.byId(parsedData, id, res);
+      await usersService.byId(parsedData, id, res);
     } else if (url.charAt(1) === "?") {
       if (req.query.ids) {
         await usersService.byIds(parsedData, req.query.ids, res);
@@ -26,7 +35,7 @@ const getUsers = async (req, res, next) => {
       await usersService.byAll(parsedData, res);
     }
   } catch (e) {
-    console.log("Catch error", e);
+    debug("error %O", e);
   }
 };
 
@@ -38,15 +47,16 @@ const addUser = async (req, res, next) => {
 
   fs.writeFile(usersPath, JSON.stringify(parsedData), err => {
     if (err) {
-      console.log(err);
+      debug("error %O", e);
     }
   });
 
   res.status(201).json(parsedData);
-
 };
 
 module.exports = {
   getUsers,
-  addUser
+  addUser,
+
+  usersPath
 };

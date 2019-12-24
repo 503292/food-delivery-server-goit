@@ -110,5 +110,6 @@ const productsService = {
 };
 
 module.exports = {
-  productsService
+  productsService,
+  productsPath
 };

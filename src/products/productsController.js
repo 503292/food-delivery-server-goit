@@ -1,4 +1,8 @@
-// const debug = require("debug")("controller");
+const fs = require("fs");
+const path = require("path");
+const debug = require("debug")("controller");
+
+const productsPath = path.join(__dirname, "..", "db", "all-products.json");
 
 const { productsService } = require("./productsService");
 
@@ -21,7 +25,7 @@ module.exports = {
 
       res.json(products);
     } catch (e) {
-      console.log("Catch error", e);
+      debug("error %O", e);
     }
   },
 
@@ -31,7 +35,26 @@ module.exports = {
       const product = await productsService.getById(getId);
       res.json(product);
     } catch (e) {
-      console.log("Catch error", e);
+      debug("error %O", e);
+    }
+  },
+  addProduct: async (req, res) => {
+    try {
+      await fs.readFile(productsPath, "utf8", (err, data) => {
+        const parsedData = JSON.parse(data);
+        parsedData.push({
+          id: Date.now(),
+          ...req.body
+        });
+        fs.writeFile(productsPath, JSON.stringify(parsedData), err => {
+          if (err) {
+            debug("error %O", e);
+          }
+          res.status(201).json(parsedData);
+        });
+      });
+    } catch (e) {
+      debug("error %O", e);
     }
   }
 };

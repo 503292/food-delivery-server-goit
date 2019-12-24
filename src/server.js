@@ -2,8 +2,9 @@ const express = require("express");
 const corsMiddleware = require("cors");
 
 const mainRoutes = require("./main/mainRoutes");
-const usersRoutes = require("./users/usersRoutes");
-const productsRoutes = require("./products/productsRouter");
+const usersRoute = require("./users/usersRoute");
+const productsRoute = require("./products/productsRoute");
+const ordersRoute = require("./orders/ordersRoute");
 
 const PORT = require("../config");
 
@@ -13,8 +14,9 @@ app.use(express.json());
 app.use(corsMiddleware());
 
 app.use("/", mainRoutes);
-app.use("/users", usersRoutes);
-app.use("/products", productsRoutes);
+app.use("/users", usersRoute);
+app.use("/products", productsRoute);
+app.use("/orders", ordersRoute);
 
 app.use("/*", (req, res, next) => {
   res.status(404).json({ message: "Invalid url" });
