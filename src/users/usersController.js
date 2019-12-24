@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const usersService = require("./usersServices");
+const usersService = require("./usersService");
 const usersPath = path.join(__dirname, "../db/all-users.json");
 
 fs.readFile(usersPath, "utf8", (err, data) => {
@@ -35,10 +35,6 @@ const addUser = async (req, res, next) => {
     id: Date.now(),
     ...req.body
   });
-  // console.log(user, "user");
-
-  // const usersArr = (user);
-  console.log(parsedData, "usersArr");
 
   fs.writeFile(usersPath, JSON.stringify(parsedData), err => {
     if (err) {
@@ -47,12 +43,7 @@ const addUser = async (req, res, next) => {
   });
 
   res.status(201).json(parsedData);
-  // try {
-  //   const user = await usersService.postUser(parsedData, req.body,usersPath, res);
-  //   res.json(user);
-  // } catch (e) {
-  //   console.log("Catch error", e);
-  // }
+
 };
 
 module.exports = {

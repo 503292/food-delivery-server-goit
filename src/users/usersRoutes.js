@@ -6,7 +6,7 @@ const {
   // putUserById,
   // deleteUserById
   getUsers
-} = require("./usersControllers");
+} = require("./usersController");
 
 const router = Router();
 

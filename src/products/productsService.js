@@ -30,7 +30,7 @@ const productsService = {
 
           res(
             getProductId
-              ? { ststus: "success", getProductId }
+              ? { status: "success", getProductId }
               : { status: "no products", products: [] }
           );
         });
