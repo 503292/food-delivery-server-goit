@@ -5,6 +5,7 @@ const mainRoutes = require("./main/mainRoutes");
 const usersRoute = require("./users/usersRoute");
 const productsRoute = require("./products/productsRoute");
 const ordersRoute = require("./orders/ordersRoute");
+const imagesRoute = require("./image/imagesRoute");
 
 const PORT = require("../config");
 
@@ -17,6 +18,7 @@ app.use("/", mainRoutes);
 app.use("/users", usersRoute);
 app.use("/products", productsRoute);
 app.use("/orders", ordersRoute);
+app.use("/images", imagesRoute)
 
 app.use("/*", (req, res, next) => {
   res.status(404).json({ message: "Invalid url" });

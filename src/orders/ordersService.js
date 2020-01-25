@@ -14,7 +14,6 @@ const ordersPath = path.join(
 
 module.exports = {
   postOrder: order => {
-    console.log(order);
     try {
       return new Promise((res, rej) => {
         fs.readFile(productsPath, "utf8", (productsErr, productsData) => {
