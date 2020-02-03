@@ -4,13 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "debug": "node --inspect index.js"
+    "start": "nodemon src/server.js",
+    "debug": "node --inspect src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "formidable": "^1.2.1",
+    "mongodb": "^3.4.0",
+    "mongoose": "^5.8.1",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.4"
+    "multer": "^1.4.2",
+    "node-validator": "^0.1.27",
+    "nodemon": "^1.18.4",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "querystring": "^0.2.0",
+    "randomstring": "^1.1.5",
+    "uuid": "^3.3.3"
   }
 }
