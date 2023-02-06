@@ -7,13 +7,12 @@ const ordersPath = path.join(
   __dirname,
   "..",
   "db",
-  "users",
   "orders",
   "all-orders.json"
 );
 
 module.exports = {
-  postOrder: order => {
+  postOrder: (order) => {
     try {
       return new Promise((res, rej) => {
         fs.readFile(productsPath, "utf8", (productsErr, productsData) => {
@@ -25,10 +24,13 @@ module.exports = {
               const ordersArr = ordersData ? JSON.parse(ordersData) : [];
               const productsArr = JSON.parse(productsData);
               const usersArr = JSON.parse(usersData);
-              const isValidUser = usersArr.find(el => el.id === order.user);
-              const avaiableProducts = productsArr.filter(el =>
-                order.products.includes(el.id)
-              );
+              const isValidUser = usersArr.find((el) => el.id === order.user);
+              const avaiableProducts = productsArr.filter((el) => {
+                const isOrder = order.products.find((opd) => opd.id === el.id);
+                if (isOrder) {
+                  return el;
+                }
+              });
 
               if (avaiableProducts.length && isValidUser) {
                 order.products = avaiableProducts;
@@ -36,18 +38,17 @@ module.exports = {
                 return fs.writeFile(
                   ordersPath,
                   JSON.stringify(ordersArr),
-                  err => {
+                  (err) => {
                     if (err) rej(err);
                     res({ message: "success", order });
                   }
                 );
               }
-
               res({
                 message: !avaiableProducts.length
                   ? "no products avaiable"
                   : "user is not valid",
-                order: null
+                order: null,
               });
             });
           });
@@ -56,5 +57,5 @@ module.exports = {
     } catch (e) {
       throw new Error("Error while creating order: ", e);
     }
-  }
+  },
 };
